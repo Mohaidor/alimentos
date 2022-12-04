@@ -38,7 +38,13 @@ class Model
     //Esta función recibe por una sentencia que NO devuelve datos (insert, delete o update) y la ejecuta
     private function consultaQueNoDevuelveDatos($sql)
     {
-        return $this->conexion->query($sql);
+        ///////////////////////////////////
+        /*Como una consulta que no devuelve datos siempre da true a menos que haya error,
+        he modificado este método para que devuelva false si no se ha modificado nada y asi poder dar mensajes descriptivos*/
+        $this->conexion->query($sql);
+        return $this->conexion->affected_rows ? true : false;
+        //return $this->conexion->query($sql);
+        ///////////////////////////////////
     }
     /*************************************/
     //Esta función obtiene todos los alimentos de la BD, para el apartado "ver alimentos"
@@ -50,7 +56,7 @@ class Model
     //Esta función obtiene todos los alimentos de la BD, para el apartado "ver alimentos"
     public function dameAlimentosOrdenados($campo, $sentido)
     {
-        
+
         $sql = "SELECT * FROM alimentos ORDER BY $campo $sentido";
         return $this->devolverAlimentosSelect($sql);
     }

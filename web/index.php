@@ -1,4 +1,36 @@
 <?php
+
+
+
+/*
+
+- Para facilitar la lectura de este ejercicio he colocado el código nuevo en la parte superior y siempre rodeado de:
+///////////////////////////////////
+[código]
+///////////////////////////////////
+
+- El código dado por el ejercicio quedará mas abajo siempre que sea posible.
+
+- A los archivos dados por el ejercicio se ha añadido estos archivos dentro de alimentos/app/templates:
+    buscarPorEnergia.php
+    eliminarPorNombre.php
+    mostrarAlimentosOrdenados.php
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // carga del modelo y los controladores
 require_once __DIR__ . '/../app/Config.php';
 require_once __DIR__ . '/../app/Model.php';
@@ -6,13 +38,18 @@ require_once __DIR__ . '/../app/Controller.php';
 // RUTAS
 // Este array asociativo se usa para saber qué acción (función del controlador) se debe disparar
 $map = array(
-    'inicio' => array('clase' => 'Controller', 'metodo' => 'inicio'),
-    'listar' => array('clase' => 'Controller', 'metodo' => 'listar'),
+
+    ///////////////////////////////////
+    //Aqui añado al array las funciones necesareas al array de los métodos de la clase controlador
     'listarOrdenados' => array('clase' => 'Controller', 'metodo' => 'listarOrdenados'),
-    'insertar' => array('clase' => 'Controller', 'metodo' => 'insertar'),
-    'buscarPorNombre' => array('clase' => 'Controller', 'metodo' => 'buscarPorNombre'),
     'buscarPorEnergia' => array('clase' => 'Controller', 'metodo' => 'buscarPorEnergia'),
     'eliminarPorNombre' => array('clase' => 'Controller', 'metodo' => 'eliminarPorNombre'),
+    ///////////////////////////////////
+
+    'inicio' => array('clase' => 'Controller', 'metodo' => 'inicio'),
+    'listar' => array('clase' => 'Controller', 'metodo' => 'listar'),
+    'insertar' => array('clase' => 'Controller', 'metodo' => 'insertar'),
+    'buscarPorNombre' => array('clase' => 'Controller', 'metodo' => 'buscarPorNombre'),
     'ver' => array('clase' => 'Controller', 'metodo' => 'ver')
 );
 // Parseo de la ruta

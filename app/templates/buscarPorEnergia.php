@@ -2,8 +2,10 @@
 <h2>BUSCAR POR ENERGIA</h2>
 <form name="formBusqueda" action="index.php?ruta=buscarPorEnergia" method="POST">
     <label for="energia">energia alimento:</label>
-    <input type="text" name="energia" id="energia" value="<?php echo $params['energia'] ?>" />
-    <span <?php /*var_dump($params['error']); var_dump();*/ echo !empty($params['error']) ? 'style="color:red"' : '' ?>><?php echo !empty($params['error']) ? $params['error'] : '(Debe ser un número)'  ?></span>
+    <input type="text" name="energia" id="energia" value="<?php echo isset($_POST['energia']) ? $_POST['energia'] : ''; ?>" />
+    <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
+        <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(Debe ser un número en KCAL)') ?>
+    </span>
     <input type="submit" value="buscar" />
 </form>
 <?php if (count($params['resultado']) > 0) : ?>

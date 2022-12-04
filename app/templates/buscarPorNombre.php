@@ -3,7 +3,9 @@
 <form name="formBusqueda" action="index.php?ruta=buscarPorNombre" method="POST">
     <label for="nombre">nombre alimento:</label>
     <input type="text" name="nombre" id="nombre" value="<?php echo $params['nombre'] ?>" />
-    <span>(puedes escribir sólo una parte del nombre)</span>
+    <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
+        <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(puedes escribir sólo una parte del nombre)') ?>
+    </span>
     <input type="submit" value="buscar" />
 </form>
 <?php if (count($params['resultado']) > 0) : ?>

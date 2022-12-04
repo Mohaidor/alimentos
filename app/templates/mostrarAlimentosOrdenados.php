@@ -1,4 +1,8 @@
-<?php ob_start() ?>
+<!--///////////////////////////////////-->
+<?php
+//comienza el guardado en cache
+ob_start()
+?>
 <h2>Ver alimentos Ordenados</h2>
 <table>
     <tr>
@@ -17,17 +21,23 @@
 <br>
 <form name="formBusqueda" action="index.php?ruta=listarOrdenados" method="POST">
     <span>Ordenar por:</span>
+    <!--Se mantienen los valores si se han introducido-->
     <select name="campo">
         <option value="nombre" <?php echo (isset($_POST['campo']) && $_POST['campo'] == 'nombre') ? 'selected' : ''; ?>>Nombre</option>
         <option value="energia" <?php echo (isset($_POST['campo']) && $_POST['campo'] == 'energia') ? 'selected' : ''; ?>>Energía</option>
         <option value="grasatotal" <?php echo (isset($_POST['campo']) && $_POST['campo'] == 'grasa') ? 'selected' : ''; ?>>Grasa</option>
     </select>
     <span>en sentido:</span>
+    <!--Se mantienen los valores si se han introducido-->
     <select name="sentido">
         <option value="asc" <?php echo (isset($_POST['sentido']) && $_POST['sentido'] == 'asc') ? 'selected' : ''; ?>>ascendente</option>
         <option value="desc" <?php echo (isset($_POST['sentido']) && $_POST['sentido'] == 'desc') ? 'selected' : ''; ?>>descendente</option>
     </select>
     <input type="submit" value="Ordenar">
 </form>
-<?php $contenido = ob_get_clean() ?>
+<?php
+//Guardar la cache con el contenido de este código en la variable $contenido y borrar cache
+$contenido = ob_get_clean() 
+?>
 <?php include 'layout.php' ?>
+<!--///////////////////////////////////-->

@@ -1,11 +1,18 @@
-<?php ob_start() ?>
+<?php
+//comienza el guardado en cache
+ob_start()
+?>
 <h2>Buscar por nombre</h2>
 <form name="formBusqueda" action="index.php?ruta=buscarPorNombre" method="POST">
     <label for="nombre">nombre alimento:</label>
+    <!--Se mantienen los valores si se han introducido-->
     <input type="text" name="nombre" id="nombre" value="<?php echo $params['nombre'] ?>" />
+    <!--En este span se muestran los mensajes de error o de operación correcta según el caso-->
+    <!--///////////////////////////////////-->
     <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
         <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(puedes escribir sólo una parte del nombre)') ?>
     </span>
+<!--///////////////////////////////////-->
     <input type="submit" value="buscar" />
 </form>
 <?php if (count($params['resultado']) > 0) : ?>
@@ -25,5 +32,8 @@
         <?php endforeach; ?>
     </table>
 <?php endif; ?>
-<?php $contenido = ob_get_clean() ?>
+<?php
+//Guardar la cache con el contenido de este código en la variable $contenido y borrar cache
+$contenido = ob_get_clean()
+?>
 <?php include 'layout.php' ?>

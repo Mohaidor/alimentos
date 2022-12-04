@@ -1,8 +1,14 @@
-<?php ob_start() ?>
+<!--///////////////////////////////////-->
+<?php
+//comienza el guardado en cache
+ob_start() 
+?>
 <h2>BUSCAR POR ENERGIA</h2>
 <form name="formBusqueda" action="index.php?ruta=buscarPorEnergia" method="POST">
     <label for="energia">energia alimento:</label>
+    <!--Se mantienen los valores si se han introducido-->
     <input type="text" name="energia" id="energia" value="<?php echo isset($_POST['energia']) ? $_POST['energia'] : ''; ?>" />
+    <!--En este span se muestran los mensajes de error o de operación correcta según el caso-->
     <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
         <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(Debe ser un número en KCAL)') ?>
     </span>
@@ -24,5 +30,8 @@
         <?php endforeach; ?>
     </table>
 <?php endif; ?>
-<?php $contenido = ob_get_clean() ?>
+<?php
+//Guardar la cache con el contenido de este código en la variable $contenido y borrar cache
+ $contenido = ob_get_clean() ?>
 <?php include 'layout.php' ?>
+<!--///////////////////////////////////-->

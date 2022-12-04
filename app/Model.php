@@ -72,6 +72,12 @@ class Model
         $sql = "select * from alimentos where id=" . $id;
         return $this->devolverAlimentosSelect($sql)[0];
     }
+    //Esta función elimina el alimentos (sólo uno) cuyo nombre es la nombre recibido
+    public function eliminarAlimentosPorNombre($nombre)
+    {
+        $sql = "DELETE FROM alimentos WHERE nombre = '$nombre' LIMIT 1";
+        return $this->consultaQueNoDevuelveDatos($sql);
+    }
     //Esta función obtiene los alimentos que contienen la cadena recibida, para el apartado "buscar por nombre"
     public function insertarAlimento(
         $n,

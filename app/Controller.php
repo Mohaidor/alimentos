@@ -122,8 +122,6 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
-
             if (is_numeric($_POST['energia'])) {
                 $params['energia'] = $_POST['energia'];
                 $params['resultado'] = $m->buscarAlimentosPorEnergia($params['energia']);
@@ -150,5 +148,23 @@ class Controller
         $alimento = $m->dameAlimento($id);
         require __DIR__ . '/templates/verAlimento.php';
         //vista de este apartado
+    }
+    //Acción para el apartado "eliminar por Nombre"
+    //En $params tenemos un campo para el input del nombre, y un array resultado que llenamos llamando al método eliminarPorNombre de Model
+    public function eliminarPorNombre()
+    {
+        $params = array('nombre' => '', 'resultado' => array());
+        $m = new Model(
+            Config::$mvc_bd_hostname,
+            Config::$mvc_bd_usuario,
+            Config::$mvc_bd_clave,
+            Config::$mvc_bd_nombre
+        );
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $params['nombre'] = $_POST['nombre'];
+            $params['resultado'] = $m->eliminarAlimentosPorNombre($params['nombre']);
+        }
+        require __DIR__ . '/templates/eliminarPorNombre.php'; //vista de este apartado
     }
 }

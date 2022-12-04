@@ -21,7 +21,7 @@ class Controller
             $params['alimentos'] = $m->dameAlimentosOrdenados($params['campo'], $params['sentido']);
             require __DIR__ . '/templates/mostrarAlimentosOrdenados.php'; //vista de este apartado
         } else {
-            //Si noo muestro la tabla como en listar()
+            //Si no relleno los alimentos como en listar()
             $params['alimentos'] = $m->dameAlimentos();
             require __DIR__ . '/templates/mostrarAlimentosOrdenados.php'; //vista de este apartado
         }
@@ -40,23 +40,9 @@ class Controller
             Config::$mvc_bd_nombre
         );
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            //Si se envía vació el campo nombre-> Error
-            if (empty($_POST['nombre'])) {
-                $params['error'] = 'El nombre no puede quedar vacío';
-            } else {
-                $params['nombre'] = $_POST['nombre'];
-                $params['resultado'] = $m->buscarAlimentosPorNombre($params['nombre']);
-
-                //Si no hay resultado->Error
-                if (empty($params['resultado'])) {
-                    $params['error'] = 'No hay alimentos que contengan: \'' . $params['nombre'] . '\'';
-                } else {
-                    //Si se ha encontrado alimento->muestro mensaje correcto
-                    $params['correcto'] = 'Mostrando resultados de los alimentos que contienen: \'' . $params['nombre'] . '\'';
-                }
-            }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['nombre'])) {
+            $params['nombre'] = $_POST['nombre'];
+            $params['resultado'] = $m->buscarAlimentosPorNombre($params['nombre']);
         }
         require __DIR__ . '/templates/buscarPorNombre.php'; //vista de este apartado
     }
@@ -72,26 +58,9 @@ class Controller
             Config::$mvc_bd_nombre
         );
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            //Si se envía vació el campo energía-> Error
-            if (empty($_POST['energia'])) {
-                $params['error'] = 'Introduce un número de energía en KCAL';
-            } elseif (!is_numeric($_POST['energia'])) {
-                //Si se envía una cadena en  el campo energía-> Error
-                $params['error'] = '¡La energía debe ser un número!';
-            } else {
-                $params['energia'] = $_POST['energia'];
-                $params['resultado'] = $m->buscarAlimentosPorEnergia($params['energia']);
-
-                //Si no hay resultado->Error
-                if (empty($params['resultado'])) {
-                    $params['error'] = 'No hay alimentos con: ' . $params['energia'] . '(KCAL)';
-                } else {
-                    //Si se ha encontrado alimento->muestro mensaje correcto
-                    $params['correcto'] = 'Mostrando resultados de los alimentos con: ' . $params['energia'] . '(KCAL)';
-                }
-            }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['energia']) && is_numeric($_POST['energia'])) {
+            $params['energia'] = $_POST['energia'];
+            $params['resultado'] = $m->buscarAlimentosPorEnergia($params['energia']);
         }
         require __DIR__ . '/templates/buscarPorEnergia.php'; //vista de este apartado
     }
@@ -109,26 +78,24 @@ class Controller
         );
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            //Si se envía vació el campo energia-> Error
-            if (empty($_POST['nombre'])) {
-                $params['error'] = 'El nombre no puede quedar vacío';
-            } else {
-                $params['nombre'] = $_POST['nombre'];
-                $params['resultado'] = $m->eliminarAlimentosPorNombre($params['nombre']);
-
-                //Si no hay resultado->Error
-                if (empty($params['resultado'])) {
-                    $params['error'] = 'No hay alimento: \'' . $params['nombre'] . '\'';
-                } else {
-                    //Si se ha eliminado alimento->muestro mensaje correcto
-                    $params['correcto'] = 'Se ha eliminado correctamente la primera ocurrencia de: \'' . $params['nombre']  . '\'';
-                }
-            }
+            $params['nombre'] = $_POST['nombre'];
+            $params['resultado'] = $m->eliminarAlimentosPorNombre($params['nombre']);
         }
         require __DIR__ . '/templates/eliminarPorNombre.php'; //vista de este apartado
     }
     ///////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

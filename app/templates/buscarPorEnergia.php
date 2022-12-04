@@ -8,11 +8,29 @@ ob_start()
     <label for="energia">energia alimento:</label>
     <!--Se mantienen los valores si se han introducido-->
     <input type="text" name="energia" id="energia" value="<?php echo isset($_POST['energia']) ? $_POST['energia'] : ''; ?>" />
-    <!--En este span se muestran los mensajes de error o de operación correcta según el caso-->
-    <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
-        <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(Debe ser un número en KCAL)') ?>
-    </span>
-    <input type="submit" value="buscar" />
+    <!--///////////////////////////////////-->
+    <!--En este div se muestran spans con los mensajes de error o de operación correcta según el caso-->
+    <div>
+        <?php
+        //texto del span junto al input
+
+        if (isset($_POST['buscar'])) {
+            if (isset($_POST['buscar']) && empty($_POST['energia'])) {
+                echo '<span style="color:red">Introduce una cantidad de energía en KCAL</span>';
+            }elseif (isset($_POST['buscar']) && !is_numeric($_POST['energia'])) {
+                echo '<span style="color:red">¡La energía debe ser un número!</span>';
+            }elseif (isset($_POST['buscar']) && empty($params['resultado'])) {
+                echo '<span style="color:red">No hay alimentos con: ' . $params['energia'] . '(KCAL)</span>';
+            }elseif (isset($_POST['buscar']) && !empty($params['resultado'])) {
+                echo '<span>Mostrando resultados de los alimentos que contienen: ' . $params['energia'] . '(KCAL)</span>';
+            }
+        }else {
+            echo '<span>(Debe ser un número en KCAL)</span>';
+        }
+        ?>
+    </div>
+    <!--///////////////////////////////////-->
+    <input type="submit" value="buscar" name="buscar"/>
 </form>
 <?php if (count($params['resultado']) > 0) : ?>
     <table>

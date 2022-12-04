@@ -7,13 +7,27 @@ ob_start()
     <label for="nombre">nombre alimento:</label>
     <!--Se mantienen los valores si se han introducido-->
     <input type="text" name="nombre" id="nombre" value="<?php echo $params['nombre'] ?>" />
-    <!--En este span se muestran los mensajes de error o de operación correcta según el caso-->
     <!--///////////////////////////////////-->
-    <span <?php echo !empty($params['error']) ? 'style="color:red"' : '' ?>>
-        <?php echo !empty($params['error']) ? $params['error'] : (!empty($params['correcto']) ? $params['correcto'] : '(puedes escribir sólo una parte del nombre)') ?>
-    </span>
-<!--///////////////////////////////////-->
-    <input type="submit" value="buscar" />
+    <!--En este div se muestran spans con los mensajes de error o de operación correcta según el caso-->
+    <div>
+        <?php
+        //texto del span junto al input
+        if (isset($_POST['buscar'])) {
+            if (empty($_POST['nombre'])) {
+                echo '<span style="color:red">El nombre no puede quedar vacío</span>';
+            } elseif (empty($params['resultado'])) {
+                echo '<span style="color:red">No hay alimentos que contengan: \'' . $params['nombre'] . '\'</span>';
+            } elseif (!empty($params['resultado'])) {
+                echo '<span>Mostrando resultados de los alimentos que contienen: \'' . $params['nombre'] . '\'</span>';
+            }
+        } else {
+            echo '<span>(puedes escribir sólo una parte del nombre)</span>';
+        }
+
+        ?>
+    </div>
+    <!--///////////////////////////////////-->
+    <input type="submit" value="buscar" name="buscar" />
 </form>
 <?php if (count($params['resultado']) > 0) : ?>
     <table>

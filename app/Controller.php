@@ -85,6 +85,31 @@ class Controller
         }
         require __DIR__ . '/templates/buscarPorNombre.php'; //vista de este apartado
     }
+    //Acción para el apartado "buscar por Energia"
+    //En $params tenemos un campo para el input de la energia, y un array resultado que llenamos llamando al método buscarAlimentosPorEnergia de Model
+    public function buscarPorEnergia()
+    {
+        $params = array('energia' => '', 'resultado' => array(), 'error' => '');
+        $m = new Model(
+            Config::$mvc_bd_hostname, 
+            Config::$mvc_bd_usuario, 
+            Config::$mvc_bd_clave, 
+            Config::$mvc_bd_nombre);
+            
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+            if (is_numeric($_POST['energia'])) {
+                $params['energia'] = $_POST['energia'];
+                $params['resultado'] = $m->buscarAlimentosPorEnergia($params['energia']);
+            }else {
+                $params['error'] = '¡La energía debe ser un número!';
+            }
+
+        }
+        require __DIR__ . '/templates/buscarPorEnergia.php'; //vista de este apartado
+    }
     //Acción para cuando se pulsa encima del nombre de un alimento
     //Este es un poco diferente, ya que decimos directamente que $params es el alimento
     public function ver()

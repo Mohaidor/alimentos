@@ -53,6 +53,12 @@ class Model
         $sql = "select * from alimentos where nombre like '%" . $nombre . "%'";
         return $this->devolverAlimentosSelect($sql);
     }
+    //Esta función obtiene los alimentos que contienen la cadena recibida, para el apartado "buscar por energia"
+    public function buscarAlimentosPorEnergia($energia)
+    {
+        $sql = "select * from alimentos where energia = $energia";
+        return $this->devolverAlimentosSelect($sql);
+    }
     //Esta función obtiene el alimentos (sólo uno) cuya id es la id recibida, para cuando hacemos click sobre un alimento
     public function dameAlimento($id)
     {

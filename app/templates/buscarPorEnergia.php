@@ -3,7 +3,7 @@
 //comienza el guardado en cache
 ob_start() 
 ?>
-<h2>BUSCAR POR ENERGIA</h2>
+<h2>BUSCAR POR ENERGÍA</h2>
 <form name="formBusqueda" action="index.php?ruta=buscarPorEnergia" method="POST">
     <label for="energia">energia alimento:</label>
     <!--Se mantienen los valores si se han introducido-->

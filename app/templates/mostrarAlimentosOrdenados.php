@@ -7,7 +7,7 @@ ob_start()
 <table>
     <tr>
         <th>alimento (por 100g)</th>
-        <th>energia (Kcal)</th>
+        <th>energía (Kcal)</th>
         <th>grasa (g)</th>
     </tr>
     <?php foreach ($params['alimentos'] as $alimento) : ?>

@@ -19,7 +19,7 @@ class Model
         return $this->devolverAlimentosSelect($sql);
     }
 
-    //Esta función obtiene los alimentos que contienen la cadena recibida, para el apartado "buscar por energia"
+    //Esta función obtiene los alimentos que contienen la cadena recibida, para el apartado "buscar por energía"
     public function buscarAlimentosPorEnergia($energia)
     {
         $sql = "SELECT * FROM alimentos WHERE energia = $energia";

@@ -2,11 +2,11 @@
 <h1><?php echo strtoupper($alimento['nombre']) ?></h1>
 <table>
     <tr>
-        <td>Energia</td>
+        <td>Energía</td>
         <td><?php echo $alimento['energia'] ?></td>
     </tr>
     <tr>
-        <td>Proteina</td>
+        <td>Proteína</td>
         <td><?php echo $alimento['proteina'] ?></td>
     </tr>
     <tr>

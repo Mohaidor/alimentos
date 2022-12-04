@@ -3,7 +3,7 @@ class Controller
 {
     ///////////////////////////////////
     //Acción para el apartado "ver alimentos  ordenados"
-    //En $params tenemos la columna a ordernar, sentido de orden y un array alimentos, que llenamos llamando al método dameAlimentos de Model
+    //En $params tenemos la columna a ordenar, sentido de orden y un array alimentos, que llenamos llamando al método dameAlimentos de Model
     public function listarOrdenados()
     {
         $params = array('campo' => '', 'sentido' => '', 'alimentos' => array());
@@ -14,7 +14,7 @@ class Controller
             Config::$mvc_bd_nombre
         );
 
-        //Si se ha enviado el form muestro el resultado según lo pedidio por el user
+        //Si se ha enviado el form muestro el resultado según lo pedido por el user
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $params['campo'] = $_POST['campo'];
             $params['sentido'] = $_POST['sentido'];
@@ -42,9 +42,9 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //Si se envia vacio el campo nombre-> Error
+            //Si se envía vació el campo nombre-> Error
             if (empty($_POST['nombre'])) {
-                $params['error'] = 'El nombre no puede quedar vacio';
+                $params['error'] = 'El nombre no puede quedar vacío';
             } else {
                 $params['nombre'] = $_POST['nombre'];
                 $params['resultado'] = $m->buscarAlimentosPorNombre($params['nombre']);
@@ -60,8 +60,8 @@ class Controller
         }
         require __DIR__ . '/templates/buscarPorNombre.php'; //vista de este apartado
     }
-    //Acción para el apartado "buscar por Energia"
-    //En $params tenemos un campo para el input de la energia, y un array resultado que llenamos llamando al método buscarAlimentosPorEnergia de Model
+    //Acción para el apartado "buscar por Energía"
+    //En $params tenemos un campo para el input de la energía, y un array resultado que llenamos llamando al método buscarAlimentosPorEnergia de Model
     public function buscarPorEnergia()
     {
         $params = array('energia' => '', 'resultado' => array(), 'error' => '', 'correcto' => '');
@@ -74,11 +74,11 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //Si se envia vacio el campo energia-> Error
+            //Si se envía vació el campo energía-> Error
             if (empty($_POST['energia'])) {
                 $params['error'] = 'Introduce un número de energía en KCAL';
             } elseif (!is_numeric($_POST['energia'])) {
-                //Si se envia una cadena en  el campo energia-> Error
+                //Si se envía una cadena en  el campo energía-> Error
                 $params['error'] = '¡La energía debe ser un número!';
             } else {
                 $params['energia'] = $_POST['energia'];
@@ -110,9 +110,9 @@ class Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //Si se envia vacio el campo energia-> Error
+            //Si se envía vació el campo energia-> Error
             if (empty($_POST['nombre'])) {
-                $params['error'] = 'El nombre no puede quedar vacio';
+                $params['error'] = 'El nombre no puede quedar vacío';
             } else {
                 $params['nombre'] = $_POST['nombre'];
                 $params['resultado'] = $m->eliminarAlimentosPorNombre($params['nombre']);

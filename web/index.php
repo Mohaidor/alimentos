@@ -40,7 +40,7 @@ require_once __DIR__ . '/../app/Controller.php';
 $map = array(
 
     ///////////////////////////////////
-    //Aqui añado al array las funciones necesareas al array de los métodos de la clase controlador
+    //Aquí añado al array las funciones necesarias al array de los métodos de la clase controlador
     'listarOrdenados' => array('clase' => 'Controller', 'metodo' => 'listarOrdenados'),
     'buscarPorEnergia' => array('clase' => 'Controller', 'metodo' => 'buscarPorEnergia'),
     'eliminarPorNombre' => array('clase' => 'Controller', 'metodo' => 'eliminarPorNombre'),
@@ -66,7 +66,7 @@ if (isset($_GET['ruta'])) {
     $ruta = 'inicio';
 }
 $controlador = $map[$ruta];
-// Ejecucion del controlador asociado a la ruta
+// Ejecución del controlador asociado a la ruta
 if (method_exists($controlador['clase'], $controlador['metodo'])) {
 
     call_user_func(array(new $controlador['clase'], $controlador['metodo']));

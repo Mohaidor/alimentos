@@ -8,9 +8,11 @@ require_once __DIR__ . '/../app/Controller.php';
 $map = array(
     'inicio' => array('clase' => 'Controller', 'metodo' => 'inicio'),
     'listar' => array('clase' => 'Controller', 'metodo' => 'listar'),
+    'listarOrdenados' => array('clase' => 'Controller', 'metodo' => 'listarOrdenados'),
     'insertar' => array('clase' => 'Controller', 'metodo' => 'insertar'),
     'buscarPorNombre' => array('clase' => 'Controller', 'metodo' => 'buscarPorNombre'),
     'buscarPorEnergia' => array('clase' => 'Controller', 'metodo' => 'buscarPorEnergia'),
+    'eliminarPorNombre' => array('clase' => 'Controller', 'metodo' => 'eliminarPorNombre'),
     'ver' => array('clase' => 'Controller', 'metodo' => 'ver')
 );
 // Parseo de la ruta

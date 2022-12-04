@@ -23,6 +23,28 @@ class Controller
         $params['alimentos'] = $m->dameAlimentos();
         require __DIR__ . '/templates/mostrarAlimentos.php'; //vista de este apartado
     }
+    //Acción para el apartado "ver alimentos  ordenados"
+    //En $params tenemos columna a ordernar, sentido de orden y un array alimentos, que llenamos llamando al método dameAlimentos de Model
+    public function listarOrdenados()
+    {
+        $params = array('campo' => '', 'sentido' => '', 'alimentos' => array());
+        $m = new Model(
+            Config::$mvc_bd_hostname,
+            Config::$mvc_bd_usuario,
+            Config::$mvc_bd_clave,
+            Config::$mvc_bd_nombre
+        );
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $params['campo'] = $_POST['campo'];
+            $params['sentido'] = $_POST['sentido'];
+            $params['alimentos'] = $m->dameAlimentosOrdenados($params['campo'], $params['sentido']);
+            require __DIR__ . '/templates/mostrarAlimentosOrdenados.php'; //vista de este apartado
+        } else {
+            $params['alimentos'] = $m->dameAlimentos();
+            require __DIR__ . '/templates/mostrarAlimentosOrdenados.php'; //vista de este apartado
+        }
+    }
     //Acción para el apartado "insertar alimento"
     //En $params tenemos un campo para cada input, que llenamos al enviar el formulario
     public function insertar()
@@ -74,11 +96,12 @@ class Controller
     {
         $params = array('nombre' => '', 'resultado' => array());
         $m = new Model(
-            Config::$mvc_bd_hostname, 
-            Config::$mvc_bd_usuario, 
-            Config::$mvc_bd_clave, 
-            Config::$mvc_bd_nombre);
-            
+            Config::$mvc_bd_hostname,
+            Config::$mvc_bd_usuario,
+            Config::$mvc_bd_clave,
+            Config::$mvc_bd_nombre
+        );
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $params['nombre'] = $_POST['nombre'];
             $params['resultado'] = $m->buscarAlimentosPorNombre($params['nombre']);
@@ -91,11 +114,12 @@ class Controller
     {
         $params = array('energia' => '', 'resultado' => array(), 'error' => '');
         $m = new Model(
-            Config::$mvc_bd_hostname, 
-            Config::$mvc_bd_usuario, 
-            Config::$mvc_bd_clave, 
-            Config::$mvc_bd_nombre);
-            
+            Config::$mvc_bd_hostname,
+            Config::$mvc_bd_usuario,
+            Config::$mvc_bd_clave,
+            Config::$mvc_bd_nombre
+        );
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -103,10 +127,9 @@ class Controller
             if (is_numeric($_POST['energia'])) {
                 $params['energia'] = $_POST['energia'];
                 $params['resultado'] = $m->buscarAlimentosPorEnergia($params['energia']);
-            }else {
+            } else {
                 $params['error'] = '¡La energía debe ser un número!';
             }
-
         }
         require __DIR__ . '/templates/buscarPorEnergia.php'; //vista de este apartado
     }

@@ -47,6 +47,13 @@ class Model
         $sql = "SELECT * FROM alimentos";
         return $this->devolverAlimentosSelect($sql);
     }
+    //Esta función obtiene todos los alimentos de la BD, para el apartado "ver alimentos"
+    public function dameAlimentosOrdenados($campo, $sentido)
+    {
+        
+        $sql = "SELECT * FROM alimentos ORDER BY $campo $sentido";
+        return $this->devolverAlimentosSelect($sql);
+    }
     //Esta función obtiene los alimentos que contienen la cadena recibida, para el apartado "buscar por nombre"
     public function buscarAlimentosPorNombre($nombre)
     {
